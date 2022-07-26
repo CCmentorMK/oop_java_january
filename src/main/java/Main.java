@@ -16,7 +16,7 @@ public class Main {
         user1.setName("Michał");
         System.out.println(user1.getName());
 
-        User user2 = new User(1, "X", "X", "X", "X", true,
+        User user2 = new User("X", "X", "X", "X", true,
                 10_000.50, LocalDateTime.now());
 
         System.out.println(user2.getName());

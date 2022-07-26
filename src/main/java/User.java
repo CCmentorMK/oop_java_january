@@ -8,33 +8,26 @@ import java.util.Date;
 // -> konstruktory
 // -> toString()
 public class User {
-    // pola klasowe -> prywatne
-    private int userId;
-    private String name;
+    // składowe statyczne -> nie są inicjalizowane przy utworzeniu kolejnych instancji, związana z klasą a nie obiektem
+    public static int lastInsertId; // przy utworzeniu nowego obiektu pole jest zawsze inicjalizowane = 0
+    // pola klasowe -> prywatne -> niestatyczne
+    private int userId;                         // init 0
+    private String name;                        // init null
     private String email;
     private String password;
     private String imagePath;
-    private boolean status;
-    private double salary;
+    private boolean status;                     // init false
+    private double salary;                      // init 0.0
     private LocalDateTime registerDateTime;     // data + czas
+    private char symbol;                        // init ???
     // default constructor
     public User() {
         System.out.println("default constructor");
-    }
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", imagePath='" + imagePath + '\'' +
-                ", status=" + status +
-                ", salary=" + salary +
-                ", registerDateTime=" + registerDateTime +
-                '}';
+        lastInsertId++;
+        this.userId = lastInsertId;
     }
     // konstruktor -> all args
-    public User(int userId,
+    public User(
                 String name,
                 String email,
                 String password,
@@ -42,7 +35,8 @@ public class User {
                 boolean status,
                 double salary,
                 LocalDateTime registerDateTime) {
-        this.userId = userId;
+        lastInsertId++;
+        this.userId = lastInsertId;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -52,13 +46,34 @@ public class User {
         this.registerDateTime = registerDateTime;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", status=" + status +
+                ", salary=" + salary +
+                ", registerDateTime=" + registerDateTime +
+                ", symbol=" + symbol +
+                '}';
+    }
+
+    // metoda statyczna jest związana tylko z klasą i nie wymaga utwozenia nowej instancji
+    // -> możemy tutaj odwoływać się tylko do składowych statycznych
+    public static int getLastInsertId() {
+        // logka aplikacji ...
+        return lastInsertId;
+    }
     // gettery & settery -> ALT + Ins
     public int getUserId() {
         return userId;
     }
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+//    public void setUserId(int userId) {
+//        this.userId = userId;
+//    }
 
     public String getName() {
         return name;
