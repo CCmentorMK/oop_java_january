@@ -1,17 +1,12 @@
-// klasa kontrolera -> kontrola dostępu do danych
-public class UserControllerImpl implements UserController {
-    // dodawanie użytkowników
+package w2;
+
+public class AdminControllerImpl implements RoleAdminController{
     @Override
     public void addUser(User user){
         users.add(user);
     }
-    // wyświetlanie użytkowników
     @Override
     public void getAllUsers(){
-//        for (User user : users) {
-//            System.out.println(user.toString());
-//        }
-        // CTRL + Space -> generate predicate
         users.forEach(user -> System.out.println(user));
     }
     @Override
